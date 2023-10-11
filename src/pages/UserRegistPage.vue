@@ -1,5 +1,5 @@
 <template>
-  <van-form @submit="onSubmit">
+  <van-form @submit="register">
     <van-cell-group inset>
       <van-field
           v-model="userAccout"
@@ -16,18 +16,28 @@
           placeholder="密码"
           :rules="[{ required: true, message: '请填写密码' }]"
       />
+        <van-field
+                v-model="checkPassword"
+                type="password"
+                name="checkPassword"
+                label="确认密码"
+                placeholder="确认密码"
+                :rules="[{ required: true, message: '确认密码' }]"
+        />
+        <van-field
+                v-model="planetCode"
+                name="planetCode"
+                label="星球编号"
+                placeholder="星球编号"
+                :rules="[{ required: true, message: '请输入星球编号' }]"
+        />
     </van-cell-group>
     <div style="margin: 16px;">
       <van-button round block type="primary" native-type="submit">
-        登录
+        提交
       </van-button>
     </div>
   </van-form>
-    <div style="margin: 16px;">
-        <van-button round block type="primary" native-type="submit" to="/user/regist">
-            新用户注册
-        </van-button>
-    </div>
 </template>
 <script setup lang="ts">
 
@@ -41,21 +51,26 @@ const router = useRouter();
 
 const userAccout = ref('');
 const userPassword = ref('');
+const checkPassword = ref('');
+const planetCode = ref('');
 
-const onSubmit = async () => {
-  const res = await myAxios.post('/user/login',{
+
+const register = async () => {
+  const res = await myAxios.post('/user/register',{
     userAccount: userAccout.value,
     userPassword: userPassword.value,
+    checkPassword: checkPassword.value,
+    planetCode: planetCode.value,
   })
-  console.log(res,'用户登录');
+  console.log(res,'用户注册');
   if (res.code == 0 && res.data){
       //跳转回之前的页面
       console.log(route.query?.redirect)
     const redirectUrl = route.query?.redirect as string ?? '/';
     window.location.href = redirectUrl;
   } else {
-    console.log('登录失败');
-    showToast('登录失败');
+    console.log('注册失败');
+    showToast('注册失败');
   }
 };
 

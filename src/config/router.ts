@@ -11,6 +11,7 @@ import TeamUpdatePage from "../pages/TeamUpdatePage.vue";
 import TeamJoinPage from "../pages/TeamJoinPage.vue";
 import TeamCreatePage from "../pages/TeamCreatePage.vue";
 import UserUpdatePage from "../pages/UserUpdatePage.vue";
+import UserRegistPage from "../pages/UserRegistPage.vue";
 
 
 const routes = [
@@ -26,6 +27,7 @@ const routes = [
     { path: '/user/list', title:'用户列表',component: SearchResultPage },
     { path: '/user/login', title:'用户登录',component: UserLoginPage },
     { path: '/user/update', title:'用户更新',component: UserUpdatePage },
+    { path: '/user/regist', title:'用户注册',component: UserRegistPage },
 ]
 
 export default routes;
